@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Risc-V Assembler</title>
+        <style>
+html, body {
+    height: 100%;
+    width: 100%;
+    margin:0px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+textarea {
+    width: 42%;
+    height: 80%;
+    resize: none;
+}
+button {
+    width: 100px;
+    height: 100px;
+    font-size: 16px;
+}
+        </style>
+        <script>
+
+var T1, T3;
+function initialize(){
+    T1 = document.getElementById("T1");
+    T3 = document.getElementById("T3");
+}
+
+function assemble(){
+    fetch('/assemble_api', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'text/plain'
+        },
+        body: T1.value
+    })
+    .then(response => response.text())
+    .then(data => {
+        console.log("Data assembled:\n"+data)
+        T3.value = data;
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
+function disassemble(){
+    fetch('/disassemble_api', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'text/plain'
+        },
+        body: T3.value
+    })
+    .then(response => response.text())
+    .then(data => {
+        console.log("Data dissassembled:\n"+data)
+        T1.value = data;
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
+        </script>
+    </head>
+    <body onload="initialize();">
+        <textarea id="T1" placeholder="Risc-V instructions here..."></textarea>
+        <div>
+            <br><br>
+            <br><br>
+            <button id="B1" onclick="assemble();"> --------> <br> Assemble</button>
+            <br><br>
+            <br><br>
+            <button id="B2" onclick="disassemble();"> <-------- <br> Disassemble </button>
+        </div>
+        <textarea id="T3" placeholder="Binary representation here..."></textarea>
+    </body>
+</html>
