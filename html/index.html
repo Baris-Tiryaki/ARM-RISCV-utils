@@ -32,7 +32,8 @@ function initialize(){
 }
 
 function assemble(){
-    fetch('/assemble_api', {
+    var architecture = document.getElementById("arch-select").value;
+    fetch(`/${architecture}/assemble_api`, {
         method: 'POST',
         headers: {
             'Content-Type': 'text/plain'
@@ -50,7 +51,8 @@ function assemble(){
 }
 
 function disassemble(){
-    fetch('/disassemble_api', {
+    var architecture = document.getElementById("arch-select").value;
+    fetch(`/${architecture}/disassemble_api`, {
         method: 'POST',
         headers: {
             'Content-Type': 'text/plain'
@@ -70,8 +72,12 @@ function disassemble(){
         </script>
     </head>
     <body onload="initialize();">
-        <textarea id="T1" placeholder="Risc-V instructions here..."></textarea>
+        <textarea id="T1" placeholder="Assembly here..."></textarea>
         <div>
+            <select id="arch-select" style="font-size: 24px;">
+                <option value="arm">ARM</option>
+                <option value="riscv">RISC-V</option>
+            </select>
             <br><br>
             <br><br>
             <button id="B1" onclick="assemble();"> --------> <br> Assemble</button>
@@ -79,6 +85,6 @@ function disassemble(){
             <br><br>
             <button id="B2" onclick="disassemble();"> <-------- <br> Disassemble </button>
         </div>
-        <textarea id="T3" placeholder="Binary representation here..."></textarea>
+        <textarea id="T3" placeholder="Hex here..."></textarea>
     </body>
 </html>
