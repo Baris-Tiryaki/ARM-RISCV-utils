@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from riscv_helper_utils import *
+from riscv.helper_utils import *
 
 import subprocess
 

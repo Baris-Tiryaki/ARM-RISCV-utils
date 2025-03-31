@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # pip install flask
 
-from riscv_computer import *
+import riscv
 
 from flask import Flask, render_template, request, jsonify
 
@@ -14,12 +14,12 @@ def index():
 @app.route('/riscv/assemble_api', methods=['POST'])
 def riscv_assemble_api():
     data = request.data.decode('utf-8')
-    return riscv_assemble(data)
+    return riscv.computer.riscv_assemble(data)
 
 @app.route('/riscv/disassemble_api', methods=['POST'])
 def riscv_disassemble_api():
     data = request.data.decode('utf-8')
-    return riscv_disassemble(data)
+    return riscv.computer.riscv_disassemble(data)
 
 
 
