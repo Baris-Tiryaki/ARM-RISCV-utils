@@ -2,6 +2,7 @@
 # pip install flask
 
 import riscv
+import arm
 
 from flask import Flask, render_template, request, jsonify
 
@@ -26,12 +27,12 @@ def riscv_disassemble_api():
 @app.route('/arm/assemble_api', methods=['POST'])
 def arm_assemble_api():
     data = request.data.decode('utf-8')
-    return "Not implemented yet"
+    return arm.computer.assemble(data)
 
 @app.route('/arm/disassemble_api', methods=['POST'])
 def arm_disassemble_api():
     data = request.data.decode('utf-8')
-    return "Not implemented yet"
+    return arm.computer.disassemble(data)
 
 
 

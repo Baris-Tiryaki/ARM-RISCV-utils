@@ -2,8 +2,6 @@
 
 from riscv.helper_utils import *
 
-import subprocess
-
 XORED_STUDENT_IDS = 123 ^ 456
 
 class Computer:
@@ -67,9 +65,9 @@ class Computer:
 
 class RiscvInstruction:
     def __init__(self):
-        self.h = 0x00000000       #These are meant to be readonly
-        self.s = "NOP;"           #These are meant to be readonly
-        self.parsed = ["NOP"]       #These are meant to be readonly
+        self.h = 0x00000000       #Readonly value
+        self.s = "NOP;"           #Readonly value
+        self.parsed = ["NOP"]     #Readonly value
     
     def fromHex(self, h):
         self.parsed = RiscvInstruction._parseFromHex(h)
